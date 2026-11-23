@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>제과제빵 & AI 활용 포트폴리오</title>
+  <style>
+    :root {
+      --bg-cream: #FAF6F0;
+      --surface-white: #FFFFFF;
+      --surface-warm: #F3ECE1;
+      --brand-brown: #8B5E3C;
+      --brand-brown-dark: #6D482C;
+      --brand-brown-light: #B38867;
+      --text-main: #2F251E;
+      --text-muted: #66584D;
+      --border-soft: #E5D9C8;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 10px 30px rgba(139, 94, 60, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-main);
+      line-height: 1.65;
+      word-break: keep-all;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(250, 246, 240, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .nav-container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--brand-brown);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-badge {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--brand-brown);
+      flex-shrink: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: color 0.2s ease;
+      white-space: nowrap;
+    }
+
+    nav a:hover {
+      color: var(--brand-brown);
+    }
+
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brand-brown);
+      background-color: var(--surface-warm);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 36px;
+      max-width: 680px;
+    }
+
+    .hero {
+      padding: 64px 0 48px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .hero-tag {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--brand-brown);
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.9rem, 4vw, 2.7rem);
+      font-weight: 800;
+      line-height: 1.3;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 span {
+      color: var(--brand-brown);
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background-color: var(--brand-brown);
+      color: #FFFFFF;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--brand-brown-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      background-color: var(--surface-white);
+      color: var(--brand-brown);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--surface-warm);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .about-card {
+      background-color: var(--surface-white);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+      min-width: 0;
+    }
+
+    .about-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--brand-brown);
+      margin-bottom: 12px;
+    }
+
+    .about-card p {
+      color: var(--text-main);
+      font-size: 0.97rem;
+      margin-bottom: 12px;
+    }
+
+    .about-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    .project-card {
+      background-color: var(--surface-white);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 32px;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .project-visual {
+      width: 100%;
+      min-width: 0;
+      background-color: var(--surface-warm);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .shortform-frame {
+      width: 100%;
+      max-width: 240px;
+      aspect-ratio: 9 / 16;
+      background: linear-gradient(160deg, #4A3121 0%, #8B5E3C 55%, #C99E76 100%);
+      border-radius: 16px;
+      padding: 18px 16px;
+      color: #FAF6F0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      box-shadow: 0 8px 20px rgba(47, 37, 30, 0.18);
+    }
+
+    .shortform-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      opacity: 0.9;
+    }
+
+    .shortform-pill {
+      background: rgba(250, 246, 240, 0.2);
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .shortform-center {
+      text-align: center;
+      padding: 12px 4px;
+    }
+
+    .shortform-center .menu-sub {
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      color: #F3DEC6;
+      margin-bottom: 6px;
+    }
+
+    .shortform-center h4 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    .shortform-center p {
+      font-size: 0.8rem;
+      line-height: 1.45;
+      color: #FAF6F0;
+      opacity: 0.92;
+    }
+
+    .shortform-bottom {
+      border-top: 1px solid rgba(250, 246, 240, 0.25);
+      padding-top: 10px;
+      font-size: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .webapp-frame {
+      width: 100%;
+      min-width: 0;
+      background-color: var(--bg-cream);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .webapp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+
+    .webapp-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--brand-brown);
+    }
+
+    .webapp-badge {
+      font-size: 0.72rem;
+      background-color: var(--surface-warm);
+      color: var(--brand-brown-dark);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    .calc-input-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+      background-color: var(--surface-white);
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-soft);
+    }
+
+    .calc-input-row label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .calc-input-row input {
+      width: 110px;
+      max-width: 100%;
+      padding: 6px 10px;
+      border: 1px solid var(--brand-brown-light);
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-align: right;
+      color: var(--text-main);
+      background-color: var(--bg-cream);
+    }
+
+    .calc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+      background-color: var(--surface-white);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .calc-table th,
+    .calc-table td {
+      padding: 8px 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .calc-table th {
+      background-color: var(--surface-warm);
+      color: var(--brand-brown-dark);
+      font-weight: 700;
+    }
+
+    .calc-table td:last-child,
+    .calc-table th:last-child {
+      text-align: right;
+      font-weight: 700;
+      color: var(--brand-brown);
+      white-space: nowrap;
+    }
+
+    .calc-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .project-info {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .project-number {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--brand-brown);
+    }
+
+    .project-info h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    .project-info p {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+    }
+
+    .project-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.92rem;
+      color: var(--text-main);
+    }
+
+    .project-points li::before {
+      content: "• ";
+      color: var(--brand-brown);
+      font-weight: 800;
+    }
+
+    .tool-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .tool-tag {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--brand-brown-dark);
+      background-color: var(--surface-warm);
+      border: 1px solid var(--border-soft);
+      padding: 5px 12px;
+      border-radius: 999px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card {
+      background-color: var(--surface-white);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: var(--shadow-soft);
+      min-width: 0;
+    }
+
+    .skill-category {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--brand-brown);
+      margin-bottom: 6px;
+    }
+
+    .skill-card h3 {
+      font-size: 1.08rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .skill-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .contact-box {
+      background-color: var(--surface-white);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .contact-box h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .contact-box p {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+    }
+
+    .email-display {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      max-width: 100%;
+      background-color: var(--bg-cream);
+      border: 1px solid var(--border-soft);
+      padding: 12px 18px;
+      border-radius: var(--radius-md);
+      margin-bottom: 12px;
+    }
+
+    .email-text {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--brand-brown-dark);
+      overflow-wrap: anywhere;
+    }
+
+    .copy-feedback {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--brand-brown);
+      min-height: 1.4em;
+    }
+
+    footer {
+      background-color: var(--surface-warm);
+      border-top: 1px solid var(--border-soft);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ai-disclosure {
+      display: inline-block;
+      background-color: var(--surface-white);
+      border: 1px solid var(--brand-brown-light);
+      color: var(--brand-brown-dark);
+      font-weight: 700;
+      font-size: 0.86rem;
+      padding: 8px 16px;
+      border-radius: var(--radius-md);
+      line-height: 1.5;
+    }
+
+    .footer-copy {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 820px) {
+      .project-card {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 22px 18px;
+      }
+
+      .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 14px 18px;
+        gap: 10px;
+      }
+
+      nav {
+        width: 100%;
+      }
+
+      nav ul {
+        gap: 10px 16px;
+        flex-wrap: wrap;
+      }
+
+      nav a {
+        font-size: 0.88rem;
+      }
+
+      main {
+        padding: 0 18px;
+      }
+
+      section {
+        padding: 52px 0;
+      }
+
+      .hero {
+        padding: 44px 0 36px;
+      }
+
+      .about-card,
+      .contact-box {
+        padding: 22px 18px;
+      }
+
+      .calc-table th,
+      .calc-table td {
+        padding: 7px 6px;
+        font-size: 0.78rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="#top" class="logo">
+        <span class="logo-badge"></span>
+        <span>BAKING &amp; AI PORTFOLIO</span>
+      </a>
+      <nav aria-label="주요 메뉴">
+        <ul>
+          <li><a href="#about">소개</a></li>
+          <li><a href="#projects">프로젝트 갤러리</a></li>
+          <li><a href="#skills">스킬</a></li>
+          <li><a href="#contact">연락처</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <p class="hero-tag">제과제빵 전공 학습 기록 &amp; 생성형 AI 프로젝트</p>
+      <h1>정확한 계량의 기본기 위에<br /><span>AI 도구의 실용성</span>을 더합니다</h1>
+      <p>
+        제과제빵과에서 익힌 공정 원리와 레시피 설계 감각을 바탕으로, 홍보 콘텐츠 제작과 작업 효율을 돕는 웹 도구를 직접 기획하고 구현한 포트폴리오입니다.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">대표 프로젝트 보기</a>
+        <a href="#about" class="btn-secondary">배움과 활용 철학</a>
+      </div>
+    </div>
+
+    <section id="about">
+      <span class="section-label">About</span>
+      <h2 class="section-title">소개</h2>
+      <p class="section-desc">
+        제과제빵과 학생으로서 수업과 실습을 통해 체득한 기본기와, AI를 바라보는 저만의 활용 기준을 정리했습니다.
+      </p>
+
+      <div class="about-grid">
+        <article class="about-card">
+          <h3>제과제빵과에서 배운 점</h3>
+          <p>
+            제과제빵은 재료의 배합 비율, 반죽의 온도와 발효 시간, 굽기 조건 등 작은 변수 하나가 결과물의 식감과 풍미를 결정짓는 정밀한 작업이라는 점을 배웠습니다.
+          </p>
+          <p>
+            또한 현장에서 반복되는 계량과 공정 계산을 정확히 이해해야 레시피를 응용할 수 있으며, 완성된 제품의 매력을 소비자에게 직관적으로 전달하는 표현력 역시 중요하다는 것을 체감했습니다.
+          </p>
+        </article>
+
+        <article class="about-card">
+          <h3>AI 활용 철학</h3>
+          <p>
+            AI는 제과제빵의 기본기와 손의 감각을 대체하는 도구가 아니라, 아이디어를 빠르게 시각화하고 반복 계산의 실수를 줄여주는 실무 파트너라고 생각합니다.
+          </p>
+          <p>
+            영상 생성과 웹앱 프로토타이핑처럼 진입 장벽이 높았던 작업도 목적에 맞는 AI 도구를 선택하면 전공 지식을 더욱 효과적으로 구현하고 공유할 수 있다는 기준을 가지고 활용하고 있습니다.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects">
+      <span class="section-label">Project Gallery</span>
+      <h2 class="section-title">대표 프로젝트</h2>
+      <p class="section-desc">
+        이번 학기 동안 전공 지식을 접목해 직접 기획·제작한 두 가지 대표 작업물입니다.
+      </p>
+
+      <div class="project-list">
+        <article class="project-card">
+          <div class="project-visual">
+            <div class="shortform-frame" role="img" aria-label="소금빵과 쫀득커피 초코빵 홍보 숏폼 영상 프레임 미리보기">
+              <div class="shortform-top">
+                <span class="shortform-pill">9:16 SHORT-FORM</span>
+                <span>00:15</span>
+              </div>
+              <div class="shortform-center">
+                <p class="menu-sub">BAKERY PROMOTION</p>
+                <h4>소금빵 &amp;<br />쫀득커피 초코빵</h4>
+                <p>
+                  바삭한 버터 풍미의 소금빵과 쫀득한 커피·초코 식감을 강조한 세로형 홍보 영상
+                </p>
+              </div>
+              <div class="shortform-bottom">
+                <span>Kling AI 비주얼</span>
+                <span>CapCut 컷·자막 편집</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-info">
+            <span class="project-number">PROJECT 01</span>
+            <h3>소금빵·쫀득커피 초코빵 홍보 숏폼 영상</h3>
+            <p>
+              베이커리 인기 품목인 소금빵과 쫀득커피 초코빵의 식감과 먹음직스러운 질감을 짧은 시간 안에 전달하기 위해 제작한 9:16 비율의 홍보 숏폼 영상입니다.
+            </p>
+            <ul class="project-points">
+              <li>Kling을 활용해 빵의 결, 윤기, 단면 질감이 돋보이는 영상 클립 생성</li>
+              <li>CapCut으로 숏폼 리듬에 맞춘 컷 전환, 핵심 포인트 자막, 사운드 싱크 편집</li>
+              <li>모바일 화면에서 제품 특징이 한눈에 들어오도록 세로 구도 전체 구성</li>
+            </ul>
+            <div class="tool-tags">
+              <span class="tool-tag">Kling</span>
+              <span class="tool-tag">CapCut</span>
+              <span class="tool-tag">숏폼 콘텐츠 기획</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-visual">
+            <div class="webapp-frame">
+              <div class="webapp-header">
+                <span class="webapp-title">베이커스 퍼센트 계산기</span>
+                <span class="webapp-badge">미니 시뮬레이터</span>
+              </div>
+              <div class="calc-input-row">
+                <label for="flourWeight">기준 밀가루 무게 (g)</label>
+                <input type="number" id="flourWeight" value="1000" min="100" step="50" />
+              </div>
+              <table class="calc-table" aria-label="베이커스 퍼센트 자동 환산 예시 표">
+                <thead>
+                  <tr>
+                    <th>재료명</th>
+                    <th>비율 (%)</th>
+                    <th>계산 중량 (g)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>강력분 (기준)</td>
+                    <td>100%</td>
+                    <td id="w-flour">1,000 g</td>
+                  </tr>
+                  <tr>
+                    <td>물</td>
+                    <td>65%</td>
+                    <td id="w-water">650 g</td>
+                  </tr>
+                  <tr>
+                    <td>버터</td>
+                    <td>12%</td>
+                    <td id="w-butter">120 g</td>
+                  </tr>
+                  <tr>
+                    <td>소금</td>
+                    <td>2%</td>
+                    <td id="w-salt">20 g</td>
+                  </tr>
+                  <tr>
+                    <td>인스턴트 드라이이스트</td>
+                    <td>1.2%</td>
+                    <td id="w-yeast">12 g</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="project-info">
+            <span class="project-number">PROJECT 02</span>
+            <h3>베이커스 퍼센트 계산기 웹앱</h3>
+            <p>
+              제과제빵 배합표 작성 시 기준 밀가루 중량(100%)에 따라 나머지 재료의 중량을 즉시 환산할 수 있도록 만든 실용 웹 애플리케이션입니다.
+            </p>
+            <ul class="project-points">
+              <li>기준 밀가루 무게 변경 시 물·버터·소금·이스트 등 각 재료 중량 자동 계산</li>
+              <li>실습 및 배합 수정 과정에서 발생하는 수기 계산 오류 방지</li>
+              <li>왼쪽 입력창의 숫자를 변경하면 실제 환산 동작을 바로 테스트 가능</li>
+            </ul>
+            <div class="tool-tags">
+              <span class="tool-tag">Google AI Studio</span>
+              <span class="tool-tag">Gemini</span>
+              <span class="tool-tag">제과제빵 배합 계산</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills">
+      <span class="section-label">Skills &amp; Tools</span>
+      <h2 class="section-title">활용 도구 및 역량</h2>
+      <p class="section-desc">
+        이번 학기 수업과 프로젝트 과정에서 직접 익히고 적용한 AI 및 콘텐츠·웹 제작 도구들입니다.
+      </p>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <p class="skill-category">AI 프로토타이핑 &amp; 개발</p>
+          <h3>Google AI Studio &amp; Gemini</h3>
+          <p>프롬프트 설계를 통한 아이디어 구체화, 베이커스 퍼센트 계산기 로직 및 웹 UI 코드 구현</p>
+        </div>
+
+        <div class="skill-card">
+          <p class="skill-category">AI 영상 생성</p>
+          <h3>Kling</h3>
+          <p>베이커리 제품의 질감과 분위기를 살린 홍보용 숏폼 비디오 소스 생성 및 프롬프트 튜닝</p>
+        </div>
+
+        <div class="skill-card">
+          <p class="skill-category">영상 편집 &amp; 후반 작업</p>
+          <h3>CapCut</h3>
+          <p>9:16 숏폼 비율 최적화, 컷 편집, 가독성 높은 타이포그래피 자막 및 리듬감 연출</p>
+        </div>
+
+        <div class="skill-card">
+          <p class="skill-category">전공 도메인 기초</p>
+          <h3>베이커스 퍼센트 &amp; 공정 이해</h3>
+          <p>밀가루 기준 배합 비율 계산, 반죽·발효·굽기 공정 특성에 기반한 콘텐츠 및 도구 기획</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <span class="section-label">Contact</span>
+      <h2 class="section-title" style="text-align: center;">연락처</h2>
+      <div class="contact-box">
+        <h3>프로젝트 및 학습 관련 문의</h3>
+        <p>
+          제과제빵 콘텐츠 제작이나 AI 활용 프로젝트에 대해 이야기를 나누고 싶으시다면 아래 이메일로 편하게 연락해 주세요.
+        </p>
+        <div class="email-display">
+          <span class="email-text" id="emailAddress">여기에_내_이메일@example.com</span>
+          <button type="button" class="btn-primary" id="copyEmailBtn" style="padding: 8px 16px; font-size: 0.86rem;">
+            이메일 복사
+          </button>
+        </div>
+        <p class="copy-feedback" id="copyFeedback" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p class="ai-disclosure">
+        AI 활용 안내: 본 포트폴리오 웹사이트의 코드 작성, 구성 및 일부 문구 초안에는 생성형 AI(Gemini, Google AI Studio 등)가 활용되었습니다.
+      </p>
+      <p class="footer-copy">
+        © 2026 제과제빵 &amp; AI 활용 포트폴리오. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const flourInput = document.getElementById('flourWeight');
+    const wFlour = document.getElementById('w-flour');
+    const wWater = document.getElementById('w-water');
+    const wButter = document.getElementById('w-butter');
+    const wSalt = document.getElementById('w-salt');
+    const wYeast = document.getElementById('w-yeast');
+
+    function formatGrams(value) {
+      return Number(value.toFixed(1)).toLocaleString('ko-KR') + ' g';
+    }
+
+    function updateBakersPercent() {
+      const base = parseFloat(flourInput.value);
+      if (isNaN(base) || base < 0) {
+        wFlour.textContent = '0 g';
+        wWater.textContent = '0 g';
+        wButter.textContent = '0 g';
+        wSalt.textContent = '0 g';
+        wYeast.textContent = '0 g';
+        return;
+      }
+      wFlour.textContent = formatGrams(base);
+      wWater.textContent = formatGrams(base * 0.65);
+      wButter.textContent = formatGrams(base * 0.12);
+      wSalt.textContent = formatGrams(base * 0.02);
+      wYeast.textContent = formatGrams(base * 0.012);
+    }
+
+    flourInput.addEventListener('input', updateBakersPercent);
+
+    const copyBtn = document.getElementById('copyEmailBtn');
+    const emailText = document.getElementById('emailAddress').textContent;
+    const feedback = document.getElementById('copyFeedback');
+
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(emailText);
+        feedback.textContent = '이메일 주소가 클립보드에 복사되었습니다.';
+      } catch (err) {
+        feedback.textContent = '이메일 주소를 직접 선택해 복사해 주세요.';
+      }
+      setTimeout(() => {
+        feedback.textContent = '';
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
